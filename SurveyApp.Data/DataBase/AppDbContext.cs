@@ -16,7 +16,6 @@ namespace SurveyApp.Data.DataBase
         }
 
         public DbSet<Question> Questions { get; set; }
-        public DbSet<QuestionPool> QuestionPool { get; set; }
         public DbSet<Score> Scores { get; set; }
         public DbSet<Survey> Surveys { get; set; }
     }

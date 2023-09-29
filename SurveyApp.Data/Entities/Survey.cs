@@ -10,8 +10,9 @@ namespace SurveyApp.Data.Entities
     {
         public List<Guid> QuestionsId { get; set; }
         public List<Question> Questions { get; set; }
-        public Guid AppUserId { get; set; }
-        public AspNetUser AppUser { get; set; }
+        public List<int> CorrectAnswerIndexes { get; set; }
+        public Guid? AppUserId { get; set; }
+        public AspNetUser? AppUser { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

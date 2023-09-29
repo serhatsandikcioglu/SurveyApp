@@ -10,6 +10,7 @@ namespace SurveyApp.Data.Entities
     {
         public string Text { get; set; }
         public List<string> Choises { get; set; }
-        public int CorrectChoiseIndex { get; set; }
+        public bool IsConfirmed { get; set; } = false;
     }
 }
+    

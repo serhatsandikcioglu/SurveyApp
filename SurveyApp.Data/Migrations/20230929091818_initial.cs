@@ -34,7 +34,6 @@ namespace SurveyApp.Data.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Surname = table.Column<string>(type: "text", nullable: false),
-                    UserImage = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -53,20 +52,6 @@ namespace SurveyApp.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "QuestionPool",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Text = table.Column<string>(type: "text", nullable: false),
-                    Choises = table.Column<List<string>>(type: "text[]", nullable: false),
-                    IsConfirmed = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_QuestionPool", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,7 +166,8 @@ namespace SurveyApp.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     QuestionsId = table.Column<List<Guid>>(type: "uuid[]", nullable: false),
-                    AppUserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CorrectAnswerIndexes = table.Column<List<int>>(type: "integer[]", nullable: false),
+                    AppUserId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -191,8 +177,7 @@ namespace SurveyApp.Data.Migrations
                         name: "FK_Surveys_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -202,7 +187,7 @@ namespace SurveyApp.Data.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Text = table.Column<string>(type: "text", nullable: false),
                     Choises = table.Column<List<string>>(type: "text[]", nullable: false),
-                    CorrectChoiseIndex = table.Column<int>(type: "integer", nullable: false),
+                    IsConfirmed = table.Column<bool>(type: "boolean", nullable: false),
                     SurveyId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
@@ -306,9 +291,6 @@ namespace SurveyApp.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "QuestionPool");
 
             migrationBuilder.DropTable(
                 name: "Questions");
