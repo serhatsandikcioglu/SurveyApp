@@ -11,6 +11,5 @@ namespace SurveyApp.Data.Entities
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string? UserImage { get; set; }
     }
 }

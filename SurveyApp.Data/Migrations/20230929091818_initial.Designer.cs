@@ -13,7 +13,7 @@ using SurveyApp.Data.DataBase;
 namespace SurveyApp.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230928103945_initial")]
+    [Migration("20230929091818_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -213,9 +213,6 @@ namespace SurveyApp.Data.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("UserImage")
-                        .HasColumnType("text");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -242,8 +239,8 @@ namespace SurveyApp.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text[]");
 
-                    b.Property<int>("CorrectChoiseIndex")
-                        .HasColumnType("integer");
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("boolean");
 
                     b.Property<Guid?>("SurveyId")
                         .HasColumnType("uuid");
@@ -257,28 +254,6 @@ namespace SurveyApp.Data.Migrations
                     b.HasIndex("SurveyId");
 
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("SurveyApp.Data.Entities.QuestionPool", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<List<string>>("Choises")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<bool>("IsConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("QuestionPool");
                 });
 
             modelBuilder.Entity("SurveyApp.Data.Entities.Score", b =>
@@ -314,8 +289,12 @@ namespace SurveyApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("AppUserId")
+                    b.Property<Guid?>("AppUserId")
                         .HasColumnType("uuid");
+
+                    b.Property<List<int>>("CorrectAnswerIndexes")
+                        .IsRequired()
+                        .HasColumnType("integer[]");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -404,9 +383,7 @@ namespace SurveyApp.Data.Migrations
                 {
                     b.HasOne("SurveyApp.Data.Entities.AspNetUser", "AppUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId");
 
                     b.Navigation("AppUser");
                 });

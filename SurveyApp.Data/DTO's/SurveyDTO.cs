@@ -9,6 +9,7 @@ namespace SurveyApp.Data.DTO_s
 {
     public class SurveyDTO
     {
+        public Guid Id { get; set; }
         public List<Guid> QuestionsId { get; set; }
         public Guid AppUserId { get; set; }
         public DateTime CreatedDate { get; set; }
