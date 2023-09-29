@@ -1,8 +1,28 @@
-﻿@{
+﻿@using SurveyApp.Data.Entities
+@model List<Question>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table class=" table table-bordered">
+    <tr>
+        <th>Employee Name</th>
+        <th>Employee Surname</th>
+        <th>Employee Title</th>
+        <th></th>
+    </tr>
+    <tbody>
+        @foreach (var question in Model)
+        {
+            <tr>
+                <td>@question.Text</td>
+                <td>@foreach (var item in question.Choises)
+                    {
+                        @item;
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Home/CreateEmployee/" class=" btn btn-primary">Create Employee</a>
