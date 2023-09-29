@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SurveyApp.Service.Interfaces;
 using SurveyApp.UI.Models;
 using System.Diagnostics;
 
@@ -7,15 +8,18 @@ namespace SurveyApp.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IQuestionService _questionService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IQuestionService questionService)
         {
             _logger = logger;
+            _questionService = questionService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var questions = _questionService.GetAll();
+            return View(questions);
         }
 
         public IActionResult Privacy()
