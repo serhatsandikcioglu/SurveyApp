@@ -14,6 +14,7 @@ namespace SurveyApp.Service.Mapper
         public MapperProfile() 
         { 
             CreateMap<Question, QuestionDTO>().ReverseMap();
+            CreateMap<AspNetUser,RegisterDTO>().ReverseMap();
         }
         
     }
