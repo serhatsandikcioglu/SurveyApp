@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SurveyApp.Data.DTO_s;
 using SurveyApp.Service.Interfaces;
@@ -6,6 +7,8 @@ using SurveyApp.Service.Interfaces;
 namespace SurveyApp.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
+
     public class QuestionPoolController : Controller
     {
         private readonly IQuestionService _questionService;
