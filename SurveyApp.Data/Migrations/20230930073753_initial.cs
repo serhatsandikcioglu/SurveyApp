@@ -186,7 +186,7 @@ namespace SurveyApp.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Text = table.Column<string>(type: "text", nullable: false),
-                    Choises = table.Column<List<string>>(type: "text[]", nullable: false),
+                    Choices = table.Column<List<string>>(type: "text[]", nullable: false),
                     IsConfirmed = table.Column<bool>(type: "boolean", nullable: false),
                     SurveyId = table.Column<Guid>(type: "uuid", nullable: true)
                 },

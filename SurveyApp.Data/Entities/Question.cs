@@ -9,7 +9,7 @@ namespace SurveyApp.Data.Entities
     public class Question : BaseEntity<Guid>
     {
         public string Text { get; set; }
-        public List<string> Choises { get; set; }
+        public List<string> Choices { get; set; }
         public bool IsConfirmed { get; set; } = false;
     }
 }

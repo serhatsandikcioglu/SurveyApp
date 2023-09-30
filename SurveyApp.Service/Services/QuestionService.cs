@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using SurveyApp.Data.DTO_s;
 using SurveyApp.Data.Entities;
 using SurveyApp.Data.Interfaces;
@@ -27,28 +28,40 @@ namespace SurveyApp.Service.Services
             var mappedQuestion =  _mapper.Map<Question>(question);
             _unitOfWork.QuestionRepository.Add(mappedQuestion);
             _unitOfWork.SaveChanges();
+            
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
-            _unitOfWork.QuestionRepository.Delete(id);
-            _unitOfWork.SaveChanges();
+            var question = _unitOfWork.QuestionRepository.GetById(id);
+            if (question != null)
+            {
+                _unitOfWork.QuestionRepository.Delete(id);
+                _unitOfWork.SaveChanges();
+            }
         }
 
-        public List<Question> GetAll()
+        public List<QuestionDTO> GetAllConfirmedQuestion()
         {
-           return _unitOfWork.QuestionRepository.GetAll();
+            var questions = _unitOfWork.QuestionRepository.GetAll(true);
+            return _mapper.Map<List<QuestionDTO>>(questions);
+        }
+        public List<QuestionDTO> GetAllNotConfirmedQuestion()
+        {
+            var questions = _unitOfWork.QuestionRepository.GetAll(false);
+            return _mapper.Map<List<QuestionDTO>>(questions);
         }
 
-        public Question GetById(int id)
+        public QuestionDTO GetById(Guid id)
         {
-            return _unitOfWork.QuestionRepository.GetById(id);
+            var question = _unitOfWork.QuestionRepository.GetById(id);
+            return _mapper.Map<QuestionDTO>(question);
         }
 
         public void Update(QuestionDTO question)
         {
             var mappedQuestion = _mapper.Map<Question>(question);
-            _unitOfWork.QuestionRepository.Add( mappedQuestion);
+            _unitOfWork.QuestionRepository.Update( mappedQuestion);
             _unitOfWork.SaveChanges();
         }
     }

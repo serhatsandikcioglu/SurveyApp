@@ -18,5 +18,14 @@ namespace SurveyApp.Data.Repositories
         {
             _dbSet = appDbContext.Set<Question>();
         }
+
+        public List<Question> GetAll(bool isConfirmed)
+        {
+            if (isConfirmed == true)
+            {
+               return _dbSet.Where(x => x.IsConfirmed == true).ToList();
+            }
+            return _dbSet.Where(x=>x.IsConfirmed == false).ToList();
+        }
     }
 }

@@ -13,7 +13,7 @@ using SurveyApp.Data.DataBase;
 namespace SurveyApp.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230929091818_initial")]
+    [Migration("20230930073753_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -235,7 +235,7 @@ namespace SurveyApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<List<string>>("Choises")
+                    b.Property<List<string>>("Choices")
                         .IsRequired()
                         .HasColumnType("text[]");
 

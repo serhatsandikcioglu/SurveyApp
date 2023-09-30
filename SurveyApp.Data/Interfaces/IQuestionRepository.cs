@@ -9,5 +9,6 @@ namespace SurveyApp.Data.Interfaces
 {
     public interface IQuestionRepository : IGenericRepository<Question>
     {
+        List<Question> GetAll(bool isConfirmed);
     }
 }
