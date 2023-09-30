@@ -10,10 +10,11 @@ namespace SurveyApp.Service.Interfaces
 {
     public interface IQuestionService
     {
-        List<Question> GetAll();
-        void Delete(int id);
+        List<QuestionDTO> GetAllConfirmedQuestion();
+        List<QuestionDTO> GetAllNotConfirmedQuestion();
+        void Delete(Guid id);
         void Update(QuestionDTO question);
         void Add(QuestionDTO question);
-        Question GetById(int id);
+        QuestionDTO GetById(Guid id);
     }
 }

@@ -232,7 +232,7 @@ namespace SurveyApp.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<List<string>>("Choises")
+                    b.Property<List<string>>("Choices")
                         .IsRequired()
                         .HasColumnType("text[]");
 

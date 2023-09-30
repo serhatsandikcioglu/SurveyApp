@@ -9,9 +9,9 @@ namespace SurveyApp.Data.Interfaces
     public interface IGenericRepository<T> where T : class
     {
         List<T> GetAll();
-        T GetById(int id);
+        T GetById(Guid id);
         void Add(T entity);
-        void Delete(int Id);
+        void Delete(Guid Id);
         void Update(T entity);
     }
 }

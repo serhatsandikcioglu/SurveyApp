@@ -1,5 +1,5 @@
-﻿@using SurveyApp.Data.Entities
-@model List<Question>
+﻿@using SurveyApp.Data.DTO_s
+@model List<QuestionDTO>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -16,7 +16,7 @@
         {
             <tr>
                 <td>@question.Text</td>
-                <td>@foreach (var item in question.Choises)
+                <td>@foreach (var item in question.Choices)
                     {
                         @item;
                     }

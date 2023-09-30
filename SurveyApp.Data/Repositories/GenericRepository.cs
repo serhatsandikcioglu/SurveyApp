@@ -23,7 +23,7 @@ namespace SurveyApp.Data.Repositories
             _dbSet.Add(entity);
         }
 
-        public void Delete(int Id)
+        public void Delete(Guid Id)
         {
             _dbSet.Remove(GetById(Id));
         }
@@ -33,7 +33,7 @@ namespace SurveyApp.Data.Repositories
             return _dbSet.ToList();
         }
 
-        public T GetById(int id)
+        public T GetById(Guid id)
         {
             return _dbSet.Find(id);
         }
