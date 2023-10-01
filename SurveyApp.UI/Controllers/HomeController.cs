@@ -18,8 +18,8 @@ namespace SurveyApp.UI.Controllers
 
         public IActionResult Index()
         {
-            var questions = _questionService.GetAllNotConfirmedQuestion();
-            return View(questions);
+            
+            return View();
         }
 
         public IActionResult Privacy()

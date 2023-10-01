@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using SurveyApp.Data.DTO_s;
 using SurveyApp.Data.Entities;
@@ -12,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace SurveyApp.Service.Services
 {
-    public class UserService : IUserService
+    public class AuthService : IAuthService
     {
         private readonly UserManager<AspNetUser> _userManager;
         private readonly SignInManager<AspNetUser> _signInManager;
         private readonly IMapper _mapper;
 
-        public UserService(UserManager<AspNetUser> userManager, IMapper mapper, SignInManager<AspNetUser> signInManager)
+        public AuthService(UserManager<AspNetUser> userManager, IMapper mapper, SignInManager<AspNetUser> signInManager)
         {
             _userManager = userManager;
             _mapper = mapper;
@@ -60,5 +59,4 @@ namespace SurveyApp.Service.Services
             return false;
         }
     }
-
 }

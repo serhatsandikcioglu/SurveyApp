@@ -31,6 +31,13 @@ namespace SurveyApp.Service.Services
             
         }
 
+        public void AddToPool(Guid id)
+        {
+           var question = _unitOfWork.QuestionRepository.GetById(id);
+            question.IsConfirmed = true;
+            _unitOfWork.SaveChanges();
+        }
+
         public void Delete(Guid id)
         {
             var question = _unitOfWork.QuestionRepository.GetById(id);
