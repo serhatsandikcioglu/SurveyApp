@@ -1,28 +1,17 @@
-﻿@using SurveyApp.Data.DTO_s
-@model List<QuestionDTO>
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<style>
+    .custom-button {
+        width: 50%;
+        height: 5em; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 
-<table class=" table table-bordered">
-    <tr>
-        <th>Employee Name</th>
-        <th>Employee Surname</th>
-        <th>Employee Title</th>
-        <th></th>
-    </tr>
-    <tbody>
-        @foreach (var question in Model)
-        {
-            <tr>
-                <td>@question.Text</td>
-                <td>@foreach (var item in question.Choices)
-                    {
-                        @item;
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<a href="/Home/CreateEmployee/" class=" btn btn-primary">Create Employee</a>
+<div class="form-group my-3">
+    <div class="btn-group d-flex flex-column">
+        <a asp-action="CreateSurvey" class="btn btn-outline-success custom-button"><i class="fa fa-list"></i> Create Survey</a>
+        <a asp-controller="account"  asp-action="Login" class="btn btn-outline-success custom-button"><i class="fa fa-list"></i> Login</a>
+        <a asp-controller="account"  asp-action="Register" class="btn btn-outline-success custom-button"><i class="fa fa-list"></i> Register</a>
+    </div>
+</div>

@@ -16,5 +16,6 @@ namespace SurveyApp.Service.Interfaces
         void Update(QuestionDTO question);
         void Add(QuestionDTO question);
         QuestionDTO GetById(Guid id);
+        void AddToPool(Guid id);
     }
 }

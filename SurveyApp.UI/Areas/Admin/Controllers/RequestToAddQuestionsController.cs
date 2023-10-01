@@ -22,5 +22,15 @@ namespace SurveyApp.UI.Areas.Admin.Controllers
             var questions = _questionService.GetAllNotConfirmedQuestion();
             return View(questions);
         }
+        public IActionResult UpdateQuestion([FromRoute(Name = "id")] Guid id)
+        {
+            _questionService.AddToPool(id);
+            return RedirectToAction("Index");
+        }
+        public IActionResult DeleteQuestion([FromRoute(Name = "id")] Guid id)
+        {
+            _questionService.Delete(id);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace SurveyApp.Service.Configurations
             services.AddAutoMapper(typeof(MapperProfile));
             services.AddScoped<IValidator<QuestionDTO>, QuestionValidator>();
             services.AddScoped<IValidator<RegisterDTO>, RegisterValidator>();
-            services.AddScoped<IUserService,UserService>();
+            services.AddScoped<IAuthService,AuthService>();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("SqlConnection"), action =>
