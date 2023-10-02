@@ -18,8 +18,4 @@
     <ProjectReference Include="..\SurveyApp.Service\SurveyApp.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Model\" />
-  </ItemGroup>
-
 </Project>

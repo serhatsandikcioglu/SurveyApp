@@ -1,4 +1,5 @@
 ﻿using SurveyApp.Data.DTO_s;
+using SurveyApp.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace SurveyApp.Service.Interfaces
         void Add(SurveyDTO survey);
         SurveyDTO GetById(Guid id);
         void Delete(Guid id);
+        List<SurveyDTO> GetAllByUserId(Guid id);
     }
 }

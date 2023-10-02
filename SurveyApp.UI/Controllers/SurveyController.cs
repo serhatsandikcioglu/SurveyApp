@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SurveyApp.Data.DataBase;
 using SurveyApp.Data.DTO_s;
@@ -13,12 +14,14 @@ namespace SurveyApp.UI.Controllers
         private readonly IQuestionService _questionService;
         private readonly ISurveyService _surveyService;
         private readonly IScoreService _scoreService;
+        private readonly UserManager<AspNetUser> _userManager;
 
-        public SurveyController(IQuestionService questionService, ISurveyService surveyService, IScoreService scoreService)
+        public SurveyController(IQuestionService questionService, ISurveyService surveyService, IScoreService scoreService, UserManager<AspNetUser> userManager)
         {
             _questionService = questionService;
             _surveyService = surveyService;
             _scoreService = scoreService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -27,8 +30,13 @@ namespace SurveyApp.UI.Controllers
             return View(questions);
         }
         [HttpPost]
-        public IActionResult CreateSurvey(SurveyDTO survey)
+        public async Task<IActionResult> CreateSurvey(SurveyDTO survey)
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user!=null)
+            {
+                survey.AppUserId = user.Id;
+            }
             _surveyService.Add(survey);
             return RedirectToAction("Survey", new { id = survey.Id });
         }
@@ -75,6 +83,11 @@ namespace SurveyApp.UI.Controllers
         {
             return View();
         }
-
+        public async Task<IActionResult> UserScore()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var surveyList = _surveyService.GetAllByUserId(user.Id);
+            return View(surveyList);
+        }
     }
 }
