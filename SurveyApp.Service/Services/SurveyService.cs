@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using SurveyApp.Data.DTO_s;
 using SurveyApp.Data.Entities;
 using SurveyApp.Data.Interfaces;
@@ -22,7 +23,7 @@ namespace SurveyApp.Service.Services
             _mapper = mapper;
         }
 
-        public void Add(SurveyDTO survey)
+        public  void Add(SurveyDTO survey)
         {
             var mappedSurvey = _mapper.Map<Survey>(survey);
             _unitOfWork.SurveyRepository.Add(mappedSurvey);
@@ -32,6 +33,13 @@ namespace SurveyApp.Service.Services
         public void Delete(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<SurveyDTO> GetAllByUserId(Guid id)
+        {
+            var surveys = _unitOfWork.SurveyRepository.GetAllByUserId(id);
+            var mappedSurveys = _mapper.Map<List<SurveyDTO>>(surveys);
+            return mappedSurveys;
         }
 
         public SurveyDTO GetById(Guid id)

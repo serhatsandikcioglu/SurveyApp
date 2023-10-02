@@ -14,6 +14,7 @@ namespace SurveyApp.Data.DTO_s
         public List<QuestionDTO> Questions { get; set; }
         public List<int> CorrectAnswerIndexes { get; set; }
         public Guid? AppUserId { get; set; }
+        public AspNetUser? AppUser { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

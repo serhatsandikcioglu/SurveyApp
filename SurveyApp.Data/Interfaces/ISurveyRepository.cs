@@ -10,5 +10,6 @@ namespace SurveyApp.Data.Interfaces
     public interface ISurveyRepository : IGenericRepository<Survey>
     {
         public Survey GetById(Guid id);
+        List<Survey> GetAllByUserId(Guid id);
     }
 }
