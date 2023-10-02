@@ -10,5 +10,7 @@ namespace SurveyApp.Data.Interfaces
     {
         void SaveChanges();
         IQuestionRepository QuestionRepository { get; }
+        ISurveyRepository SurveyRepository { get; }
+        IScoreRepository ScoreRepository { get; }
     }
 }

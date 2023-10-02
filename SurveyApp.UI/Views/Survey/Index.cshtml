@@ -1,1 +1,23 @@
-﻿
+﻿<form method="post" action="Survey/CreateSurvey">
+    <div>
+        <input type="hidden" name="Id" value="@Guid.NewGuid()" />
+        <input type="hidden" name="AppUserId" value="UserIdPlaceholder" />
+    </div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div>
+            <input type="hidden" name="QuestionsId[@i]" value="@Model[i].Id" />
+            <label>@Model[i].Text</label>
+            <ul>
+                @for (int j = 0; j < Model[i].Choices.Count; j++)
+                {
+                    <li>
+                        <input type="radio" name="CorrectAnswerIndexes[@i]" value="@j" @(j == 0 ? "checked" : "") />
+                        @Model[i].Choices[j]
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    <button class="btn-btn-primary" type="submit">Create Survey</button>
+</form>

@@ -31,8 +31,8 @@ using (var scope = app.Services.CreateScope())
     if (!dbContext.Users.Any())
     {
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AspNetUser>>();
-        var user = new AspNetUser() { UserName = "admin" , Name="serhat" , Surname="san" , Email="admin@admin.com"};
-        await userManager.CreateAsync(user, "Asd123*");
+        var user = new AspNetUser() { UserName = "admin" , Name="AdminName" , Surname="AdminSurname" , Email="admin@admin.com"};
+        await userManager.CreateAsync(user, "Asd123**");
         await userManager.AddToRoleAsync(user, "admin");
 
     }
