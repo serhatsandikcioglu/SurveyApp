@@ -19,6 +19,8 @@ namespace SurveyApp.Data.Repositories
             _serviceProvider = serviceProvider;
         }
         private IQuestionRepository _questionRepository ;
+        private ISurveyRepository _surveyRepository;
+        private IScoreRepository _scoreRepository;
         public IQuestionRepository QuestionRepository
         {
             get
@@ -26,6 +28,26 @@ namespace SurveyApp.Data.Repositories
                 if (_questionRepository == default(IQuestionRepository))
                     _questionRepository = _serviceProvider.GetRequiredService<IQuestionRepository>();
                 return _questionRepository;
+            }
+
+        }
+        public ISurveyRepository SurveyRepository
+        {
+            get
+            {
+                if (_surveyRepository == default(ISurveyRepository))
+                    _surveyRepository = _serviceProvider.GetRequiredService<ISurveyRepository>();
+                return _surveyRepository;
+            }
+
+        }
+        public IScoreRepository ScoreRepository
+        {
+            get
+            {
+                if (_scoreRepository == default(IScoreRepository))
+                    _scoreRepository = _serviceProvider.GetRequiredService<IScoreRepository>();
+                return _scoreRepository;
             }
 
         }

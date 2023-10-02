@@ -33,6 +33,10 @@ namespace SurveyApp.Service.Configurations
             services.AddScoped<IValidator<QuestionDTO>, QuestionValidator>();
             services.AddScoped<IValidator<RegisterDTO>, RegisterValidator>();
             services.AddScoped<IAuthService,AuthService>();
+            services.AddScoped<ISurveyRepository,SurveyRepository>();
+            services.AddScoped<ISurveyService,SurveyService>();
+            services.AddScoped<IScoreRepository,ScoreRepository>();
+            services.AddScoped<IScoreService,ScoreService>();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("SqlConnection"), action =>

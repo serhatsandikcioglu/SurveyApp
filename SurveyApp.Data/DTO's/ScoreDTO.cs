@@ -11,9 +11,10 @@ namespace SurveyApp.Data.DTO_s
     {
         public Guid Id { get; set; }
         public Guid SurveyId { get; set; }
-        public Survey Survey { get; set; }
+        public SurveyDTO Survey { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public List<int> UserAnswerIndexes { get; set; }
         public int NumberOfCorrectAnswer { get; set; }
     }
 }
