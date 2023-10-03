@@ -9,10 +9,11 @@ Bu bölüm, kullanıcıların uygulamayı nasıl kullanacaklarını ve ana işle
 
 ### Kullanıcı Kaydı ve Girişi:
 
-Uygulamayı tüm özellikleri ile kullanmak için bir hesap oluşturun veya var olan bir hesapla giriş yapın. Üye olmayan kullanıcılarda kısıtlı bir şekilde anket oluşturabilir.
+Uygulamayı tüm özellikleri ile kullanmak için bir hesap oluşturun veya var olan bir hesapla giriş yapın.
+
 ### Anket Oluşturma:
 
-Ana sayfada "Anket Oluştur" düğmesine tıklayarak karşsınıza çıkan soruların doğru olmasını istediğiniz yanıtlarını seçerek anketinizi oluşturun. Yönlendirileceğiniz anket sayfasının linkini istediğiniz kişilere göndererek ankete ulaşmalarını sağlayabilirsiniz.
+Ana sayfada "Anket Oluştur" butonuna tıklayarak karşsınıza çıkan sorulardan ankete eklemek istediğiniz soruları seçip devam butonuna tıklayınız. Seçtiğiniz sorular listelenecektir, doğru olmasını istediğiniz yanıtlarını seçerek anketinizi oluşturun. Yönlendirileceğiniz anket sayfasının linkini istediğiniz kişilere göndererek ankete ulaşmalarını sağlayabilirsiniz. Üye olmayan kullanıcılar havuzdaki 10 soru arasından 4 soruluk bir anket oluşturabilir, oluşturdukları anketi en fazla 5 kişi yanıtlayabilir. Üye olan kullanıcı soru havuzunu tamamen kullanabilir, oluşturdukları 10 soruluk anketi çözebilecek kişi sayısı için bir limit yoktur.
 
 ### Anket Cevaplama:
 
@@ -24,7 +25,7 @@ Oluşturulan link üzerinden erişilen ankete isim soyisim bilgilerini girip, do
 
 ### Soru Havuzu:
 
-Üye olan kullanıcılar menüdeki soru havuzu sekmesinden soru ekleme talebi gönderebilirler. ilgili sekmede soru talebi gönder butonu ile erişecekleri soru formunu doldurduklarında eklemek istedikleri soru admine iletilecek ve onaylanırsa soru havuzuna eklenecektir. Üye olmayan kullanıcılar soru eklemek isterse login sayfasına yönlendirilecekler.
+Üye olan kullanıcılar menüdeki soru havuzu sekmesinden soru ekleme talebi gönderebilirler. ilgili sekmede soru talebi gönder butonu ile erişecekleri soru formunu doldurduklarında eklemek istedikleri soru admine iletilecek ve onaylanırsa soru havuzuna eklenecektir. Üye olmayan kullanıcılar soru eklemek isterse login sayfasına yönlendirileceklerdir.
 
 ### Admin Kullanıcısı:
 
