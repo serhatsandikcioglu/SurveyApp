@@ -37,6 +37,7 @@ namespace SurveyApp.UI.Controllers
             if (validationResult.IsValid)
             {
                 _questionService.Add(question);
+                TempData["success"] = "Question request has been sended to admin";
                 return RedirectToAction("Index");
             }
             foreach (var error in validationResult.Errors)

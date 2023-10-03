@@ -25,11 +25,13 @@ namespace SurveyApp.UI.Areas.Admin.Controllers
         public IActionResult UpdateQuestion([FromRoute(Name = "id")] Guid id)
         {
             _questionService.AddToPool(id);
+            TempData["success"] = "Question has been added to pool";
             return RedirectToAction("Index");
         }
         public IActionResult DeleteQuestion([FromRoute(Name = "id")] Guid id)
         {
             _questionService.Delete(id);
+            TempData["danger"] = "Question request has been deleted";
             return RedirectToAction("Index");
         }
     }

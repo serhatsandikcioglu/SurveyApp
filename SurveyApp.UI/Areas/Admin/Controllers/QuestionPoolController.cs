@@ -39,7 +39,8 @@ namespace SurveyApp.UI.Areas.Admin.Controllers
             {
             question.IsConfirmed = true;
             _questionService.Add(question);
-            return RedirectToAction("Index");
+                TempData["success"] = "Question has been created";
+                return RedirectToAction("Index");
             }
             foreach (var error in validationResult.Errors)
             {
@@ -60,17 +61,20 @@ namespace SurveyApp.UI.Areas.Admin.Controllers
             {
                 question.IsConfirmed = true;
                 _questionService.Update(question);
-            return RedirectToAction("Index");
+                TempData["success"] = "Question has been updated";
+                return RedirectToAction("Index");
             }
             foreach (var error in validationResult.Errors)
             {
                 ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
             }
+
             return View(question);
         }
         public IActionResult DeleteQuestion([FromRoute(Name = "id")] Guid id)
         {
             _questionService.Delete(id);
+            TempData["danger"] = "Question has been deleted";
             return RedirectToAction("Index");
         }
     }
