@@ -10,7 +10,7 @@ namespace SurveyApp.Service.Interfaces
 {
     public interface ISurveyService
     {
-        void Add(SurveyDTO survey);
+        Guid Add(SurveyDTO survey);
         SurveyDTO GetById(Guid id);
         void Delete(Guid id);
         List<SurveyDTO> GetAllByUserId(Guid id);
