@@ -38,6 +38,7 @@ namespace SurveyApp.UI.Controllers
                 survey.AppUserId = user.Id;
             }
             _surveyService.Add(survey);
+            TempData["success"] = "Survey has been created";
             return RedirectToAction("Survey", new { id = survey.Id });
         }
 
@@ -51,6 +52,7 @@ namespace SurveyApp.UI.Controllers
         public IActionResult CreateScore(ScoreDTO score)
         {
             _scoreService.Add(score);
+            TempData["success"] = "Survey result recorded";
             return RedirectToAction("ScoreResult" , new { id = score.Id });
         }
         public IActionResult ScoreResult(Guid id)
@@ -88,6 +90,7 @@ namespace SurveyApp.UI.Controllers
             var user = await _userManager.GetUserAsync(User);
             var surveyList = _surveyService.GetAllByUserId(user.Id);
             return View(surveyList);
+;
         }
     }
 }

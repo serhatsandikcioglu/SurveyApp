@@ -1,7 +1,6 @@
 ﻿<form method="post" action="Survey/CreateSurvey">
     <div>
         <input type="hidden" name="Id" value="@Guid.NewGuid()" />
-        <input type="hidden" name="AppUserId" value="" />
     </div>
     @if (User.Identity.IsAuthenticated)
     {
@@ -24,7 +23,7 @@
     }
     else
     {
-        @for (int i = 0; i < 4; i++)
+        @for (int i = 0; i < Math.Min(4, Model.Count); i++)
         {
             <div>
                 <input type="hidden" name="QuestionsId[@i]" value="@Model[i].Id" />
