@@ -71,5 +71,15 @@ namespace SurveyApp.Service.Services
             _unitOfWork.QuestionRepository.Update( mappedQuestion);
             _unitOfWork.SaveChanges();
         }
+        public List<QuestionDTO> GetQuestionList(QuestionModel model)
+        {
+            List<QuestionDTO> questionList = new List<QuestionDTO>();
+            foreach (var guid in model.selectedQuestions)
+            {
+               var question = _unitOfWork.QuestionRepository.GetById(guid);
+                questionList.Add(_mapper.Map<QuestionDTO>(question)); 
+            }
+            return questionList;
+        }
     }
 }

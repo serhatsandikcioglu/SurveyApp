@@ -24,10 +24,22 @@ namespace SurveyApp.UI.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async  Task<IActionResult> Index(QuestionModel questions)
         {
-            var questions = _questionService.GetAllConfirmedQuestion().ToList();
-            return View(questions);
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null && questions.selectedQuestions.Count > 4)
+            {
+                TempData["danger"] = "Non-members can add up to 4 questions to the survey.";
+                return RedirectToAction("SurveyQuestions");
+            }
+            if (user != null && questions.selectedQuestions.Count > 10)
+            {
+                TempData["danger"] = "You can add up to 10 questions to the survey.";
+                return RedirectToAction("SurveyQuestions");
+            }
+            var surveyQuestions = _questionService.GetQuestionList(questions);
+            TempData["success"] = "Select the answers.";
+            return View(surveyQuestions);
         }
         [HttpPost]
         public async Task<IActionResult> CreateSurvey(SurveyDTO survey)
@@ -91,6 +103,11 @@ namespace SurveyApp.UI.Controllers
             var surveyList = _surveyService.GetAllByUserId(user.Id);
             return View(surveyList);
 ;
+        }
+        public IActionResult SurveyQuestions()
+        {
+            var questions = _questionService.GetAllConfirmedQuestion().ToList();
+            return View(questions);
         }
     }
 }
