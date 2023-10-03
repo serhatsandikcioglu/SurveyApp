@@ -22,7 +22,7 @@ namespace SurveyApp.Service.Services
             _mapper = mapper;
         }
 
-        public void Add(ScoreDTO score)
+        public Guid Add(ScoreDTO score)
         {
             var survey = _unitOfWork.SurveyRepository.GetById(score.SurveyId);
             for (int i = 0; i < survey.CorrectAnswerIndexes.Count; i++)
@@ -35,6 +35,7 @@ namespace SurveyApp.Service.Services
            var mappedScore = _mapper.Map<Score>(score);
             _unitOfWork.ScoreRepository.Add(mappedScore);
             _unitOfWork.SaveChanges();
+            return mappedScore.Id;
         }
 
         public void Delete(Guid id)

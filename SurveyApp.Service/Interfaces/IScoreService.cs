@@ -9,7 +9,7 @@ namespace SurveyApp.Service.Interfaces
 {
     public interface IScoreService
     {
-        void Add(ScoreDTO score);
+        Guid Add(ScoreDTO score);
         ScoreDTO GetById(Guid id);
         void Delete(Guid id);
         List<ScoreDTO> GetScoresBySurvey(Guid id);
