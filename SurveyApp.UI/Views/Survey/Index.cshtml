@@ -1,10 +1,20 @@
-﻿<form method="post" action="CreateSurvey">
+﻿<div>
+<form method="post" action="CreateSurvey">
+    <table class="table table-stripped table-hover">
+        <thead>
+            <tr>
+                    <th>Question</th>
+                    <th>Choises</th>
+                </tr>
+            </thead>
+            <tbody>
         @for (int i = 0; i < Model.Count; i++)
         {
-            <div>
+            <tr>
                 <input type="hidden" name="QuestionsId[@i]" value="@Model[i].Id" />
-                <label>@Model[i].Text</label>
-                <ul>
+                        <td class="text-center">@Model[i].Text</td>
+                        <td class="left-align">
+                        <ul>
                     @for (int j = 0; j < Model[i].Choices.Count; j++)
                     {
                         <li>
@@ -13,8 +23,11 @@
                         </li>
                     }
                 </ul>
-            </div>
+                        </td>
+                    </tr>
         }
-
+            </tbody>  
+</table>
     <button class="btn btn-primary" type="submit">Create Survey</button>
 </form>
+</div>

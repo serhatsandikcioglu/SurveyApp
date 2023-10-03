@@ -26,5 +26,9 @@ namespace SurveyApp.Data.Repositories
         {
             return _dbSet.Where(x => x.SurveyId == id).Include(x=>x.Survey).ToList();
         }
+        public int GetScoreCount(Guid id)
+        {
+            return _dbSet.Count(x => x.SurveyId == id);
+        }
     }
 }

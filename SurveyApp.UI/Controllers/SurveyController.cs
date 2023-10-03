@@ -57,6 +57,11 @@ namespace SurveyApp.UI.Controllers
 
         public IActionResult Survey(Guid id)
         {
+            bool result = _scoreService.IsThereLessThanFiveResult(id);
+            if (result == false)
+            {
+                return View("QuotaFilled");
+            }
             var survey = _surveyService.GetById(id);
             
             return View(survey);
@@ -109,6 +114,11 @@ namespace SurveyApp.UI.Controllers
         {
             var questions = _questionService.GetAllConfirmedQuestion().ToList();
             return View(questions);
+        }
+        public IActionResult QuotaFilled()
+        {
+            
+            return View();
         }
     }
 }

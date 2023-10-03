@@ -11,5 +11,6 @@ namespace SurveyApp.Data.Interfaces
     {
         List<Score> GetScoresBySurvey(Guid id);
         Score GetById(Guid id);
+        int GetScoreCount(Guid id);
     }
 }

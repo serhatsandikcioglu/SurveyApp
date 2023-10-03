@@ -53,5 +53,15 @@ namespace SurveyApp.Service.Services
             var mappedScores = scores.Select(score => _mapper.Map<ScoreDTO>(score)).ToList();
             return mappedScores;
         }
+        public bool IsThereLessThanFiveResult(Guid surveyId)
+        {
+           Survey survey = _unitOfWork.SurveyRepository.GetByIdWithUser(surveyId);
+           int scoreCount = _unitOfWork.ScoreRepository.GetScoreCount(surveyId);
+            if (survey.AppUser == null && scoreCount >= 5)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
