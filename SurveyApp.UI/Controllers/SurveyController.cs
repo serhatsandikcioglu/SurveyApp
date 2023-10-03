@@ -39,6 +39,7 @@ namespace SurveyApp.UI.Controllers
             }
             var surveyQuestions = _questionService.GetQuestionList(questions);
             TempData["success"] = "Select the answers.";
+            questions.selectedQuestions = null;
             return View(surveyQuestions);
         }
         [HttpPost]
