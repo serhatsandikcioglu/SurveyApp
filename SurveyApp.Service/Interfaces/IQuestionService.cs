@@ -17,5 +17,6 @@ namespace SurveyApp.Service.Interfaces
         void Add(QuestionDTO question);
         QuestionDTO GetById(Guid id);
         void AddToPool(Guid id);
+        List<QuestionDTO> GetQuestionList(QuestionModel model);
     }
 }
