@@ -67,11 +67,17 @@ namespace SurveyApp.UI.Controllers
             return View(survey);
         }
         [HttpPost]
-        public IActionResult CreateScore(ScoreDTO score)
+        public async Task<IActionResult> CreateScore(ScoreDTO score)
         {
-            _scoreService.Add(score);
+            AspNetUser user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                score.Name = user.Name;
+                score.Surname = user.Surname;
+            }
+            Guid scoreId = _scoreService.Add(score);
             TempData["success"] = "Survey result recorded";
-            return RedirectToAction("ScoreResult" , new { id = score.Id });
+            return Redirect("/Survey/ScoreResult/" + scoreId);
         }
         public IActionResult ScoreResult(Guid id)
         {

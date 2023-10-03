@@ -1,16 +1,20 @@
 ﻿@model SurveyDTO
 <form method="post" action="@Url.Action("CreateScore", "Survey")">
     <input type="hidden" name="surveyId" value="@Model.Id" />
-    <input type="hidden" name="Id" value="@Guid.NewGuid()" />
-    <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-    </div>
+    
+     @if (!User.Identity.IsAuthenticated)
+    {
+        <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
 
-    <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
-        <label for="surname">Surname:</label>
-        <input type="text" id="surname" name="surname" required>
-    </div>
+        <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+        </div>
+    }
+    
 
     <table class="table table-striped table-hover">
         <thead>
