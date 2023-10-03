@@ -13,5 +13,6 @@ namespace SurveyApp.Service.Interfaces
         ScoreDTO GetById(Guid id);
         void Delete(Guid id);
         List<ScoreDTO> GetScoresBySurvey(Guid id);
+        bool IsThereLessThanFiveResult(Guid surveyId);
     }
 }

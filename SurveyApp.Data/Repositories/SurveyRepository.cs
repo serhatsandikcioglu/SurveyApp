@@ -22,10 +22,13 @@ namespace SurveyApp.Data.Repositories
         {
             return _dbSet.Where(x=>x.Id == id).Include(x=>x.Questions).FirstOrDefault();
         }
-        public List<Survey> GetAllByUserId(Guid id)
+        public Survey GetByIdWithUser(Guid id)
+        {
+            return _dbSet.Where(x => x.Id == id).Include(x => x.AppUser).FirstOrDefault();
+        }
+            public List<Survey> GetAllByUserId(Guid id)
         {
             return _dbSet.Where(x => x.AppUserId == id).ToList();
         }
-
     }
 }
