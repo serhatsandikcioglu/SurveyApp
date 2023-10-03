@@ -37,9 +37,9 @@ namespace SurveyApp.UI.Controllers
             {
                 survey.AppUserId = user.Id;
             }
-            _surveyService.Add(survey);
+            Guid surveyId = _surveyService.Add(survey);
             TempData["success"] = "Survey has been created";
-            return RedirectToAction("Survey", new { id = survey.Id });
+            return RedirectToAction("Survey", new { id = surveyId });
         }
 
         public IActionResult Survey(Guid id)

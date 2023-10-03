@@ -23,11 +23,12 @@ namespace SurveyApp.Service.Services
             _mapper = mapper;
         }
 
-        public  void Add(SurveyDTO survey)
+        public Guid Add(SurveyDTO survey)
         {
             var mappedSurvey = _mapper.Map<Survey>(survey);
             _unitOfWork.SurveyRepository.Add(mappedSurvey);
             _unitOfWork.SaveChanges();
+            return mappedSurvey.Id;
         }
 
         public void Delete(Guid id)

@@ -26,5 +26,6 @@ namespace SurveyApp.Data.Repositories
         {
             return _dbSet.Where(x => x.AppUserId == id).ToList();
         }
+
     }
 }
