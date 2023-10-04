@@ -26,7 +26,7 @@ namespace SurveyApp.Service.Services
 
         public async Task<bool> AuthenticateAsync(string email, string password)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            AspNetUser user = await _userManager.FindByEmailAsync(email);
             if (user is not null)
             {
                 await _signInManager.SignOutAsync();
@@ -41,7 +41,7 @@ namespace SurveyApp.Service.Services
         }
         public async Task<bool> RegisterUserAsync(RegisterDTO registerDTO)
         {
-            var aspNetUser = _mapper.Map<AspNetUser>(registerDTO);
+            AspNetUser aspNetUser = _mapper.Map<AspNetUser>(registerDTO);
             aspNetUser.UserName = registerDTO.EMail;
 
             var result = await _userManager.CreateAsync(aspNetUser, registerDTO.Password);

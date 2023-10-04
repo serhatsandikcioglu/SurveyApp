@@ -21,7 +21,7 @@ namespace SurveyApp.UI.Controllers
 
         public IActionResult Index()
         {
-            var questions = _questionService.GetAllConfirmedQuestion();
+            List<QuestionDTO> questions = _questionService.GetAllConfirmedQuestion();
 
             return View(questions);
         }

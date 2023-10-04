@@ -24,7 +24,7 @@ namespace SurveyApp.Service.Services
 
         public Guid Add(ScoreDTO score)
         {
-            var survey = _unitOfWork.SurveyRepository.GetById(score.SurveyId);
+            Survey survey = _unitOfWork.SurveyRepository.GetById(score.SurveyId);
             for (int i = 0; i < survey.CorrectAnswerIndexes.Count; i++)
             {
                 if (survey.CorrectAnswerIndexes[i] == score.UserAnswerIndexes[i])
@@ -32,7 +32,7 @@ namespace SurveyApp.Service.Services
                     score.NumberOfCorrectAnswer++;
                 }
             }
-           var mappedScore = _mapper.Map<Score>(score);
+           Score mappedScore = _mapper.Map<Score>(score);
             _unitOfWork.ScoreRepository.Add(mappedScore);
             _unitOfWork.SaveChanges();
             return mappedScore.Id;
@@ -45,13 +45,13 @@ namespace SurveyApp.Service.Services
 
         public ScoreDTO GetById(Guid id)
         {
-            var score = _unitOfWork.ScoreRepository.GetById(id);
+            Score score = _unitOfWork.ScoreRepository.GetById(id);
             return _mapper.Map<ScoreDTO>(score);
         }
         public List<ScoreDTO> GetScoresBySurvey(Guid id)
         {
-           var scores = _unitOfWork.ScoreRepository.GetScoresBySurvey(id);
-            var mappedScores = scores.Select(score => _mapper.Map<ScoreDTO>(score)).ToList();
+           List<Score> scores = _unitOfWork.ScoreRepository.GetScoresBySurvey(id);
+            List<ScoreDTO> mappedScores = scores.Select(score => _mapper.Map<ScoreDTO>(score)).ToList();
             return mappedScores;
         }
         public bool IsThereLessThanFiveResult(Guid surveyId)
