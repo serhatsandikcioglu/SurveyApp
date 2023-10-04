@@ -5,6 +5,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace SurveyApp.Data.Migrations
 {
     /// <inheritdoc />
@@ -165,6 +167,8 @@ namespace SurveyApp.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Surname = table.Column<string>(type: "text", nullable: false),
                     QuestionsId = table.Column<List<Guid>>(type: "uuid[]", nullable: false),
                     CorrectAnswerIndexes = table.Column<List<int>>(type: "integer[]", nullable: false),
                     AppUserId = table.Column<Guid>(type: "uuid", nullable: true),
@@ -219,6 +223,17 @@ namespace SurveyApp.Data.Migrations
                         principalTable: "Surveys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Questions",
+                columns: new[] { "Id", "Choices", "IsConfirmed", "SurveyId", "Text" },
+                values: new object[,]
+                {
+                    { new Guid("51ad40a2-25b5-4ba4-890e-dda7420df1d8"), new List<string> { "Patates Kızartması", "Burger", "Döner", "Kuru Fasulye", "Makarna" }, true, null, "En sevdiği yemek?" },
+                    { new Guid("66aa5135-14d0-4369-859b-c29b05750149"), new List<string> { "Uyuyarak", "Bilgisayar başında", "Yürüyüş yaparak", "Kitap okuyarak", "Arkadaşlarıyla buluşarak" }, true, null, "Zamanını nasıl geçirir?" },
+                    { new Guid("898f6390-57e3-4bad-948b-f278a0bfb4a8"), new List<string> { "Pop", "Rap", "Rock", "Türk Halk Müziği", "Arabes" }, true, null, "En sevdiği müzik türü?" },
+                    { new Guid("f4616c56-8bfb-40c8-b415-22ca5dc2ec08"), new List<string> { "Kayıp parayı bulmak", "Tuttuğu takımın galibiyeti", "Süpriz hediye almak", "Alışveriş mağazasındaki indirimler", "Çekilişle telefon kazanmak" }, true, null, "Onu en çok ne sevindirir?" }
                 });
 
             migrationBuilder.CreateIndex(

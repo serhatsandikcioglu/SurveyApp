@@ -49,6 +49,8 @@ namespace SurveyApp.UI.Controllers
             if (user!=null)
             {
                 survey.AppUserId = user.Id;
+                survey.Name = user.Name;
+                survey.Surname = user.Surname;
             }
             Guid surveyId = _surveyService.Add(survey);
             TempData["success"] = "Survey has been created. You can share this page link";

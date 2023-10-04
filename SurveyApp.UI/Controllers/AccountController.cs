@@ -30,9 +30,10 @@ namespace SurveyApp.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool isAuthenticated = await _authService.AuthenticateAsync(model.EMail, model.Password);
+                bool isAuthenticated = await _authService.AuthenticateAsync(model.Email, model.Password);
                 if (isAuthenticated)
                 {
+                    TempData["success"] = "Welcome";
                     return Redirect("/");
                 }
                 ModelState.AddModelError("Error", "Invalid username or password");
@@ -42,6 +43,7 @@ namespace SurveyApp.UI.Controllers
         public async Task<IActionResult> Logout([FromQuery(Name ="ReturnUrl")]string returnUrl="/")
         {
             await _authService.LogoutAsync();
+            TempData["success"] = "Session Ended";
             return Redirect(returnUrl);
         }
         public IActionResult Register()
@@ -58,6 +60,7 @@ namespace SurveyApp.UI.Controllers
             bool isSuccess = await _authService.RegisterUserAsync(registerDTO);
                 if (isSuccess)
                 {
+                    TempData["success"] = "Registration Complete";
                     return RedirectToAction("Login");
                 }
                 else

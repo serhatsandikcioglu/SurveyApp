@@ -1,7 +1,7 @@
 ﻿@model SurveyDTO
 <form method="post" action="@Url.Action("CreateScore", "Survey")">
     <input type="hidden" name="surveyId" value="@Model.Id" />
-    
+    <div class="display-6">@Model.Name @Model.Surname's Survey</div>
      @if (!User.Identity.IsAuthenticated)
     {
         <div style="display: flex; flex-direction: column; margin-bottom: 10px;">

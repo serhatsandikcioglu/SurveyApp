@@ -5,7 +5,7 @@
         <a class="nav-link" area-current="page" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fa-solid fa-gear"></i> Admin</a>
     </li>
 }
-@if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+@if (User.Identity.IsAuthenticated)
 {
     <li class="navbar-nav">
         <a class="nav-link" area-current="page" asp-area="" asp-controller="Survey" asp-action="UserScore"><i class="fa fa-list"></i> My Surveys</a>

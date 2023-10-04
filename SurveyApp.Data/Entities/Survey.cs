@@ -8,6 +8,8 @@ namespace SurveyApp.Data.Entities
 {
     public class Survey : BaseEntity<Guid>
     {
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public List<Guid> QuestionsId { get; set; }
         public List<Question> Questions { get; set; }
         public List<int> CorrectAnswerIndexes { get; set; }
