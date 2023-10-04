@@ -25,7 +25,7 @@ namespace SurveyApp.Service.Services
 
         public Guid Add(SurveyDTO survey)
         {
-            var mappedSurvey = _mapper.Map<Survey>(survey);
+            Survey mappedSurvey = _mapper.Map<Survey>(survey);
             _unitOfWork.SurveyRepository.Add(mappedSurvey);
             _unitOfWork.SaveChanges();
             return mappedSurvey.Id;
@@ -38,20 +38,20 @@ namespace SurveyApp.Service.Services
 
         public List<SurveyDTO> GetAllByUserId(Guid id)
         {
-            var surveys = _unitOfWork.SurveyRepository.GetAllByUserId(id);
+            List<Survey> surveys = _unitOfWork.SurveyRepository.GetAllByUserId(id);
             var mappedSurveys = _mapper.Map<List<SurveyDTO>>(surveys);
             return mappedSurveys;
         }
 
         public SurveyDTO GetById(Guid id)
         {
-            var survey = _unitOfWork.SurveyRepository.GetById(id);
-            var surveyDTO = _mapper.Map<SurveyDTO>(survey);
+            Survey survey = _unitOfWork.SurveyRepository.GetById(id);
+            SurveyDTO surveyDTO = _mapper.Map<SurveyDTO>(survey);
             surveyDTO.Questions = new List<QuestionDTO>();
             foreach (var questionId in surveyDTO.QuestionsId)
             {
-                var question = _unitOfWork.QuestionRepository.GetById(questionId);
-                var questionDTO = _mapper.Map<QuestionDTO>(question);
+                Question question = _unitOfWork.QuestionRepository.GetById(questionId);
+                QuestionDTO questionDTO = _mapper.Map<QuestionDTO>(question);
                 surveyDTO.Questions.Add(questionDTO);
             }
             return surveyDTO;

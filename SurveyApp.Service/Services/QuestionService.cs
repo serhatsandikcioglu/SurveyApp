@@ -25,7 +25,7 @@ namespace SurveyApp.Service.Services
 
         public void Add(QuestionDTO question)
         {
-            var mappedQuestion =  _mapper.Map<Question>(question);
+            Question mappedQuestion =  _mapper.Map<Question>(question);
             _unitOfWork.QuestionRepository.Add(mappedQuestion);
             _unitOfWork.SaveChanges();
             
@@ -33,14 +33,14 @@ namespace SurveyApp.Service.Services
 
         public void AddToPool(Guid id)
         {
-           var question = _unitOfWork.QuestionRepository.GetById(id);
+           Question question = _unitOfWork.QuestionRepository.GetById(id);
             question.IsConfirmed = true;
             _unitOfWork.SaveChanges();
         }
 
         public void Delete(Guid id)
         {
-            var question = _unitOfWork.QuestionRepository.GetById(id);
+            Question question = _unitOfWork.QuestionRepository.GetById(id);
             if (question != null)
             {
                 _unitOfWork.QuestionRepository.Delete(id);
@@ -50,24 +50,24 @@ namespace SurveyApp.Service.Services
 
         public List<QuestionDTO> GetAllConfirmedQuestion()
         {
-            var questions = _unitOfWork.QuestionRepository.GetAll(true);
+            List<Question> questions = _unitOfWork.QuestionRepository.GetAll(true);
             return _mapper.Map<List<QuestionDTO>>(questions);
         }
         public List<QuestionDTO> GetAllNotConfirmedQuestion()
         {
-            var questions = _unitOfWork.QuestionRepository.GetAll(false);
+            List<Question> questions = _unitOfWork.QuestionRepository.GetAll(false);
             return _mapper.Map<List<QuestionDTO>>(questions);
         }
 
         public QuestionDTO GetById(Guid id)
         {
-            var question = _unitOfWork.QuestionRepository.GetById(id);
+            Question question = _unitOfWork.QuestionRepository.GetById(id);
             return _mapper.Map<QuestionDTO>(question);
         }
 
         public void Update(QuestionDTO question)
         {
-            var mappedQuestion = _mapper.Map<Question>(question);
+            Question mappedQuestion = _mapper.Map<Question>(question);
             _unitOfWork.QuestionRepository.Update( mappedQuestion);
             _unitOfWork.SaveChanges();
         }
@@ -76,7 +76,7 @@ namespace SurveyApp.Service.Services
             List<QuestionDTO> questionList = new List<QuestionDTO>();
             foreach (var guid in model.selectedQuestions)
             {
-               var question = _unitOfWork.QuestionRepository.GetById(guid);
+               Question question = _unitOfWork.QuestionRepository.GetById(guid);
                 questionList.Add(_mapper.Map<QuestionDTO>(question)); 
             }
             return questionList;

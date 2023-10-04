@@ -14,7 +14,7 @@
                 <input type="hidden" name="QuestionsId[@i]" value="@Model[i].Id" />
                         <td class="text-center">@Model[i].Text</td>
                         <td class="left-align">
-                        <ul>
+                            <ul style="list-style-type: none; padding: 0;">
                     @for (int j = 0; j < Model[i].Choices.Count; j++)
                     {
                         <li>

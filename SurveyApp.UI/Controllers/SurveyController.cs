@@ -26,7 +26,7 @@ namespace SurveyApp.UI.Controllers
 
         public async  Task<IActionResult> Index(QuestionModel questions)
         {
-            var user = await _userManager.GetUserAsync(User);
+            AspNetUser user = await _userManager.GetUserAsync(User);
             if (user == null && questions.selectedQuestions.Count > 4)
             {
                 TempData["danger"] = "Non-members can add up to 4 questions to the survey.";
@@ -37,21 +37,21 @@ namespace SurveyApp.UI.Controllers
                 TempData["danger"] = "You can add up to 10 questions to the survey.";
                 return RedirectToAction("SurveyQuestions");
             }
-            var surveyQuestions = _questionService.GetQuestionList(questions);
+            List<QuestionDTO> surveyQuestions = _questionService.GetQuestionList(questions);
             TempData["success"] = "Select the answers.";
-            questions.selectedQuestions = null;
+            //questions.selectedQuestions = null;
             return View(surveyQuestions);
         }
         [HttpPost]
         public async Task<IActionResult> CreateSurvey(SurveyDTO survey)
         {
-            var user = await _userManager.GetUserAsync(User);
+            AspNetUser user = await _userManager.GetUserAsync(User);
             if (user!=null)
             {
                 survey.AppUserId = user.Id;
             }
             Guid surveyId = _surveyService.Add(survey);
-            TempData["success"] = "Survey has been created";
+            TempData["success"] = "Survey has been created. You can share this page link";
             return RedirectToAction("Survey", new { id = surveyId });
         }
 
@@ -62,7 +62,7 @@ namespace SurveyApp.UI.Controllers
             {
                 return View("QuotaFilled");
             }
-            var survey = _surveyService.GetById(id);
+            SurveyDTO survey = _surveyService.GetById(id);
             
             return View(survey);
         }
@@ -81,12 +81,12 @@ namespace SurveyApp.UI.Controllers
         }
         public IActionResult ScoreResult(Guid id)
         {
-            var score =_scoreService.GetById(id);
+            ScoreDTO score =_scoreService.GetById(id);
             return View(score);
         }
         public IActionResult SurveyResults(Guid id)
         {
-           var scores = _scoreService.GetScoresBySurvey(id);
+           List<ScoreDTO> scores = _scoreService.GetScoresBySurvey(id);
             return View(scores);
         }
         public IActionResult GetSurveyResults(string surveyLink)
@@ -111,19 +111,18 @@ namespace SurveyApp.UI.Controllers
         }
         public async Task<IActionResult> UserScore()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var surveyList = _surveyService.GetAllByUserId(user.Id);
+            AspNetUser user = await _userManager.GetUserAsync(User);
+            List<SurveyDTO> surveyList = _surveyService.GetAllByUserId(user.Id);
             return View(surveyList);
 ;
         }
         public IActionResult SurveyQuestions()
         {
-            var questions = _questionService.GetAllConfirmedQuestion().ToList();
+            List<QuestionDTO> questions = _questionService.GetAllConfirmedQuestion().ToList();
             return View(questions);
         }
         public IActionResult QuotaFilled()
-        {
-            
+        { 
             return View();
         }
     }

@@ -30,7 +30,7 @@ namespace SurveyApp.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isAuthenticated = await _authService.AuthenticateAsync(model.EMail, model.Password);
+                bool isAuthenticated = await _authService.AuthenticateAsync(model.EMail, model.Password);
                 if (isAuthenticated)
                 {
                     return Redirect("/");
@@ -55,7 +55,7 @@ namespace SurveyApp.UI.Controllers
             if (validationResult.IsValid)
             {
 
-            var isSuccess = await _authService.RegisterUserAsync(registerDTO);
+            bool isSuccess = await _authService.RegisterUserAsync(registerDTO);
                 if (isSuccess)
                 {
                     return RedirectToAction("Login");
