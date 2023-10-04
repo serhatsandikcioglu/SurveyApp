@@ -16,7 +16,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddIdentity<AspNetUser, AspNetRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 ServiceConfiguration.ConfigureServices(builder.Services, builder.Configuration);
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())

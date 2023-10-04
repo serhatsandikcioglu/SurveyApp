@@ -1,6 +1,19 @@
 ﻿<div>
 <form method="post" action="CreateSurvey">
-    <table class="table table-stripped table-hover">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div style="display: flex; flex-direction: column; margin-bottom: 10px;">
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="surname" required>
+            </div>
+        }
+
+        <table class="table table-stripped table-hover">
         <thead>
             <tr>
                     <th>Question</th>

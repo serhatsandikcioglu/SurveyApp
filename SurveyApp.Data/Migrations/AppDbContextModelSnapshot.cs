@@ -251,6 +251,36 @@ namespace SurveyApp.Data.Migrations
                     b.HasIndex("SurveyId");
 
                     b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("51ad40a2-25b5-4ba4-890e-dda7420df1d8"),
+                            Choices = new List<string> { "Patates Kızartması", "Burger", "Döner", "Kuru Fasulye", "Makarna" },
+                            IsConfirmed = true,
+                            Text = "En sevdiği yemek?"
+                        },
+                        new
+                        {
+                            Id = new Guid("898f6390-57e3-4bad-948b-f278a0bfb4a8"),
+                            Choices = new List<string> { "Pop", "Rap", "Rock", "Türk Halk Müziği", "Arabes" },
+                            IsConfirmed = true,
+                            Text = "En sevdiği müzik türü?"
+                        },
+                        new
+                        {
+                            Id = new Guid("66aa5135-14d0-4369-859b-c29b05750149"),
+                            Choices = new List<string> { "Uyuyarak", "Bilgisayar başında", "Yürüyüş yaparak", "Kitap okuyarak", "Arkadaşlarıyla buluşarak" },
+                            IsConfirmed = true,
+                            Text = "Zamanını nasıl geçirir?"
+                        },
+                        new
+                        {
+                            Id = new Guid("f4616c56-8bfb-40c8-b415-22ca5dc2ec08"),
+                            Choices = new List<string> { "Kayıp parayı bulmak", "Tuttuğu takımın galibiyeti", "Süpriz hediye almak", "Alışveriş mağazasındaki indirimler", "Çekilişle telefon kazanmak" },
+                            IsConfirmed = true,
+                            Text = "Onu en çok ne sevindirir?"
+                        });
                 });
 
             modelBuilder.Entity("SurveyApp.Data.Entities.Score", b =>
@@ -296,9 +326,17 @@ namespace SurveyApp.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<List<Guid>>("QuestionsId")
                         .IsRequired()
                         .HasColumnType("uuid[]");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

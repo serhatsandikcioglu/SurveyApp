@@ -37,6 +37,7 @@ namespace SurveyApp.Service.Configurations
             services.AddScoped<ISurveyService,SurveyService>();
             services.AddScoped<IScoreRepository,ScoreRepository>();
             services.AddScoped<IScoreService,ScoreService>();
+            services.AddIdentity<AspNetUser, AspNetRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("SqlConnection"), action =>
