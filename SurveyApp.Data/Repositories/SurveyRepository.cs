@@ -20,7 +20,7 @@ namespace SurveyApp.Data.Repositories
         }
         public Survey GetById(Guid id)
         {
-            return _dbSet.Where(x=>x.Id == id).Include(x=>x.Questions).FirstOrDefault();
+           return _dbSet.Include(x=>x.Questions).FirstOrDefault(x => x.Id == id);
         }
         public Survey GetByIdWithUser(Guid id)
         {

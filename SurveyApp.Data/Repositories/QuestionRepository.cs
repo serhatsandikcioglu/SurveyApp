@@ -27,5 +27,10 @@ namespace SurveyApp.Data.Repositories
             }
             return _dbSet.Where(x=>x.IsConfirmed == false).ToList();
         }
+
+        public List<Question> GetByIds(List<Guid> ids)
+        {
+            return _dbSet.Where(q => ids.Contains(q.Id)).ToList();
+        }
     }
 }

@@ -39,9 +39,11 @@
                                 <i class="fa fa-edit"></i>
                                 Edit</a>
 
-                            <a class="btn btn-danger" asp-action="DeleteQuestion" asp-route-id="@question.Id">
+                            <a class="btn btn-danger" asp-action="DeleteQuestion" asp-route-id="@question.Id"
+                               onclick="return confirm('Bu soruyu silmek istediğinize emin misiniz?');">
                                 <i class="fa fa-trash"></i>
-                                Delete</a>
+                                Delete
+                            </a>
                 </div>
             </td>
             </tr>
