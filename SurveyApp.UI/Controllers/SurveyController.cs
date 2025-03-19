@@ -103,6 +103,7 @@ namespace SurveyApp.UI.Controllers
             }
             catch (UriFormatException)
             {
+                TempData["danger"] = "Survey not found";
                 return View("FindSurveyResults");
             }
             

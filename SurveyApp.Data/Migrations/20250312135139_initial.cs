@@ -57,6 +57,20 @@ namespace SurveyApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Questions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Text = table.Column<string>(type: "text", nullable: false),
+                    Choices = table.Column<List<string>>(type: "text[]", nullable: false),
+                    IsConfirmed = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -185,23 +199,27 @@ namespace SurveyApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Questions",
+                name: "QuestionSurvey",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Text = table.Column<string>(type: "text", nullable: false),
-                    Choices = table.Column<List<string>>(type: "text[]", nullable: false),
-                    IsConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    SurveyId = table.Column<Guid>(type: "uuid", nullable: true)
+                    QuestionsId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SurveysId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.PrimaryKey("PK_QuestionSurvey", x => new { x.QuestionsId, x.SurveysId });
                     table.ForeignKey(
-                        name: "FK_Questions_Surveys_SurveyId",
-                        column: x => x.SurveyId,
+                        name: "FK_QuestionSurvey_Questions_QuestionsId",
+                        column: x => x.QuestionsId,
+                        principalTable: "Questions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_QuestionSurvey_Surveys_SurveysId",
+                        column: x => x.SurveysId,
                         principalTable: "Surveys",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -227,13 +245,13 @@ namespace SurveyApp.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Questions",
-                columns: new[] { "Id", "Choices", "IsConfirmed", "SurveyId", "Text" },
+                columns: new[] { "Id", "Choices", "IsConfirmed", "Text" },
                 values: new object[,]
                 {
-                    { new Guid("51ad40a2-25b5-4ba4-890e-dda7420df1d8"), new List<string> { "Patates Kızartması", "Burger", "Döner", "Kuru Fasulye", "Makarna" }, true, null, "En sevdiği yemek?" },
-                    { new Guid("66aa5135-14d0-4369-859b-c29b05750149"), new List<string> { "Uyuyarak", "Bilgisayar başında", "Yürüyüş yaparak", "Kitap okuyarak", "Arkadaşlarıyla buluşarak" }, true, null, "Zamanını nasıl geçirir?" },
-                    { new Guid("898f6390-57e3-4bad-948b-f278a0bfb4a8"), new List<string> { "Pop", "Rap", "Rock", "Türk Halk Müziği", "Arabes" }, true, null, "En sevdiği müzik türü?" },
-                    { new Guid("f4616c56-8bfb-40c8-b415-22ca5dc2ec08"), new List<string> { "Kayıp parayı bulmak", "Tuttuğu takımın galibiyeti", "Süpriz hediye almak", "Alışveriş mağazasındaki indirimler", "Çekilişle telefon kazanmak" }, true, null, "Onu en çok ne sevindirir?" }
+                    { new Guid("083bfa2e-f3b1-46bf-aff8-f0ab1d02c87c"), new List<string> { "Kayıp parayı bulmak", "Tuttuğu takımın galibiyeti", "Süpriz hediye almak", "Alışveriş mağazasındaki indirimler", "Çekilişle telefon kazanmak" }, true, "Onu en çok ne sevindirir?" },
+                    { new Guid("276f77f2-7f11-4c17-8fa2-55a40324da36"), new List<string> { "Uyuyarak", "Bilgisayar başında", "Yürüyüş yaparak", "Kitap okuyarak", "Arkadaşlarıyla buluşarak" }, true, "Zamanını nasıl geçirir?" },
+                    { new Guid("ce386fdc-2d0d-46a6-9053-03d12c4e47c5"), new List<string> { "Patates Kızartması", "Burger", "Döner", "Kuru Fasulye", "Makarna" }, true, "En sevdiği yemek?" },
+                    { new Guid("f31270db-e674-4f61-83c6-4cf07d5f74eb"), new List<string> { "Pop", "Rap", "Rock", "Türk Halk Müziği", "Arabes" }, true, "En sevdiği müzik türü?" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -274,9 +292,9 @@ namespace SurveyApp.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Questions_SurveyId",
-                table: "Questions",
-                column: "SurveyId");
+                name: "IX_QuestionSurvey_SurveysId",
+                table: "QuestionSurvey",
+                column: "SurveysId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Scores_SurveyId",
@@ -308,13 +326,16 @@ namespace SurveyApp.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "QuestionSurvey");
 
             migrationBuilder.DropTable(
                 name: "Scores");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "Surveys");

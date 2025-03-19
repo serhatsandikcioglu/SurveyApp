@@ -13,7 +13,7 @@ using SurveyApp.Data.DataBase;
 namespace SurveyApp.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231004125200_initial")]
+    [Migration("20250312135139_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -129,6 +129,21 @@ namespace SurveyApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("QuestionSurvey", b =>
+                {
+                    b.Property<Guid>("QuestionsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SurveysId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("QuestionsId", "SurveysId");
+
+                    b.HasIndex("SurveysId");
+
+                    b.ToTable("QuestionSurvey");
+                });
+
             modelBuilder.Entity("SurveyApp.Data.Entities.AspNetRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -242,44 +257,39 @@ namespace SurveyApp.Data.Migrations
                     b.Property<bool>("IsConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid?>("SurveyId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SurveyId");
-
                     b.ToTable("Questions");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("51ad40a2-25b5-4ba4-890e-dda7420df1d8"),
+                            Id = new Guid("ce386fdc-2d0d-46a6-9053-03d12c4e47c5"),
                             Choices = new List<string> { "Patates Kızartması", "Burger", "Döner", "Kuru Fasulye", "Makarna" },
                             IsConfirmed = true,
                             Text = "En sevdiği yemek?"
                         },
                         new
                         {
-                            Id = new Guid("898f6390-57e3-4bad-948b-f278a0bfb4a8"),
+                            Id = new Guid("f31270db-e674-4f61-83c6-4cf07d5f74eb"),
                             Choices = new List<string> { "Pop", "Rap", "Rock", "Türk Halk Müziği", "Arabes" },
                             IsConfirmed = true,
                             Text = "En sevdiği müzik türü?"
                         },
                         new
                         {
-                            Id = new Guid("66aa5135-14d0-4369-859b-c29b05750149"),
+                            Id = new Guid("276f77f2-7f11-4c17-8fa2-55a40324da36"),
                             Choices = new List<string> { "Uyuyarak", "Bilgisayar başında", "Yürüyüş yaparak", "Kitap okuyarak", "Arkadaşlarıyla buluşarak" },
                             IsConfirmed = true,
                             Text = "Zamanını nasıl geçirir?"
                         },
                         new
                         {
-                            Id = new Guid("f4616c56-8bfb-40c8-b415-22ca5dc2ec08"),
+                            Id = new Guid("083bfa2e-f3b1-46bf-aff8-f0ab1d02c87c"),
                             Choices = new List<string> { "Kayıp parayı bulmak", "Tuttuğu takımın galibiyeti", "Süpriz hediye almak", "Alışveriş mağazasındaki indirimler", "Çekilişle telefon kazanmak" },
                             IsConfirmed = true,
                             Text = "Onu en çok ne sevindirir?"
@@ -399,11 +409,19 @@ namespace SurveyApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SurveyApp.Data.Entities.Question", b =>
+            modelBuilder.Entity("QuestionSurvey", b =>
                 {
+                    b.HasOne("SurveyApp.Data.Entities.Question", null)
+                        .WithMany()
+                        .HasForeignKey("QuestionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SurveyApp.Data.Entities.Survey", null)
-                        .WithMany("Questions")
-                        .HasForeignKey("SurveyId");
+                        .WithMany()
+                        .HasForeignKey("SurveysId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SurveyApp.Data.Entities.Score", b =>
@@ -424,11 +442,6 @@ namespace SurveyApp.Data.Migrations
                         .HasForeignKey("AppUserId");
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("SurveyApp.Data.Entities.Survey", b =>
-                {
-                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

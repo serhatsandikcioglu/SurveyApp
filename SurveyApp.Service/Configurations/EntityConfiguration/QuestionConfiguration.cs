@@ -17,7 +17,6 @@ namespace SurveyApp.Service.Configurations.EntityConfiguration
             builder.Property(x => x.Text).IsRequired();
             builder.Property(x => x.Choices).IsRequired();
             builder.Property(x => x.IsConfirmed).IsRequired();
-
         }
     }
 }

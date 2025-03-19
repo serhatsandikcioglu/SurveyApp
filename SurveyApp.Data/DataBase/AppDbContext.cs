@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SurveyApp.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace SurveyApp.Data.DataBase
             SeedDatabase(modelBuilder);
         }
         protected void SeedDatabase(ModelBuilder modelBuilder)
-        {
+        {   
             modelBuilder.Entity<Question>().HasData(
                 new Question
                 {

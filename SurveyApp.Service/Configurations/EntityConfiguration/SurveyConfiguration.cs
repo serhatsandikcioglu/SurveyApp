@@ -17,8 +17,8 @@ namespace SurveyApp.Service.Configurations.EntityConfiguration
             builder.Property(x => x.QuestionsId).IsRequired();
             builder.Property(x => x.CorrectAnswerIndexes).IsRequired();
 
-            builder.HasOne(c => c.Questions).WithMany().HasForeignKey(c => c.QuestionsId).OnDelete(DeleteBehavior.NoAction);
-
+            builder.HasMany(s => s.Questions)
+              .WithMany(q => q.Surveys);
         }
     }
 }

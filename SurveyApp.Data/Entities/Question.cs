@@ -11,6 +11,7 @@ namespace SurveyApp.Data.Entities
         public string Text { get; set; }
         public List<string> Choices { get; set; }
         public bool IsConfirmed { get; set; } = false;
+        public virtual List<Survey> Surveys { get; set; } = new();
     }
 }
     
