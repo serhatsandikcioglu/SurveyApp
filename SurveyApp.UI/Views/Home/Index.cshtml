@@ -1,17 +1,86 @@
 ﻿<style>
-    .custom-button {
-        width: 50%;
-        height: 5em; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .hero-container {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .survey-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-btn {
+        height: 5rem;
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+        border: none;
+    }
+
+        .custom-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+    .btn-create {
+        background: linear-gradient(45deg, #00b09b, #96c93d);
+        color: white;
+    }
+
+    .btn-login {
+        background: linear-gradient(45deg, #4e54c8, #8f94fb);
+        color: white;
+    }
+
+    .btn-register {
+        background: linear-gradient(45deg, #ff9966, #ff5e62);
+        color: white;
+    }
+
+    .btn-icon {
+        margin-right: 10px;
+        font-size: 1.4rem;
+    }
+
+    .site-title {
+        color: #2d3436;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        text-align: center;
     }
 </style>
 
-<div class="form-group text-center my-3">
-    <div class="btn-group d-flex flex-column align-items-center">
-        <a href="Survey/SurveyQuestions" class="btn btn-outline-success custom-button"> Create Survey</a>
-        <a asp-controller="account"  asp-action="Login" class="btn btn-outline-success custom-button"> Login</a>
-        <a asp-controller="account"  asp-action="Register" class="btn btn-outline-success custom-button"> Register</a>
+<div class="hero-container d-flex align-items-center justify-content-center">
+    <div class="survey-card">
+        <h1 class="site-title">Survey App</h1>
+        <div class="d-flex flex-column align-items-center gap-4" style="min-width: 300px;">
+            <a href="Survey/SurveyQuestions"
+               class="btn custom-btn btn-create w-100 d-flex align-items-center justify-content-center">
+                <i class="bi bi-plus-circle btn-icon"></i>
+                Create Survey
+            </a>
+
+            <a asp-controller="account" asp-action="Login"
+               class="btn custom-btn btn-login w-100 d-flex align-items-center justify-content-center">
+                <i class="bi bi-box-arrow-in-right btn-icon"></i>
+                Login
+            </a>
+
+            <a asp-controller="account" asp-action="Register"
+               class="btn custom-btn btn-register w-100 d-flex align-items-center justify-content-center">
+                <i class="bi bi-person-plus btn-icon"></i>
+                Register
+            </a>
+        </div>
     </div>
 </div>
+
+<!-- Bootstrap Icons CDN'ini ekleyin (Layout dosyanızda yoksa) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
