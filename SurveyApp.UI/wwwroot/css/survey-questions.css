@@ -1,0 +1,169 @@
+﻿/* Survey Container */
+.survey-container {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 4rem; /* Increased margin to prevent footer overlap */
+}
+
+/* Table Styles */
+.table {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+    .table th {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        color: #6c757d;
+        padding: 1rem;
+    }
+
+    .table td {
+        padding: 1rem;
+        vertical-align: middle;
+        word-break: break-word;
+    }
+
+/* Table Responsive Container */
+.table-responsive {
+    max-height: calc(100vh - 400px); /* Adjusted height to account for footer */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dee2e6 #fff;
+}
+
+    .table-responsive::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .table-responsive::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb {
+        background-color: #dee2e6;
+        border-radius: 4px;
+    }
+
+/* Choice List */
+.choice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .choice-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        color: #495057;
+    }
+
+        .choice-list li:last-child {
+            margin-bottom: 0;
+        }
+
+/* Custom Checkbox */
+.custom-checkbox {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    border-color: #dee2e6;
+}
+
+    .custom-checkbox:checked {
+        background-color: #00b09b;
+        border-color: #00b09b;
+    }
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    color: #6c757d;
+}
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #dee2e6;
+    }
+
+    .empty-state p {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .empty-state small {
+        color: #adb5bd;
+    }
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(45deg, #00b09b, #96c93d);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #009688, #8bc34a);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* Alert Styles */
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.alert-info {
+    background-color: rgba(0, 176, 155, 0.1);
+    color: #00b09b;
+}
+
+.alert-link {
+    color: #009688;
+    text-decoration: underline;
+}
+
+    .alert-link:hover {
+        color: #00b09b;
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .survey-container {
+        padding: 1rem;
+        margin-bottom: 3rem; /* Adjusted margin for mobile */
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+    }
+
+    .table-responsive {
+        max-height: calc(100vh - 350px); /* Adjusted height for mobile */
+    }
+
+    .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+}
