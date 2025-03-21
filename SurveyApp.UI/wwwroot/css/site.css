@@ -20,6 +20,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #f5f7fa;
 }
 
 /* Navbar styles */
@@ -45,10 +46,16 @@ body {
     max-width: 1200px;
 }
 
+/* Main content area */
+.flex-grow-1 {
+    flex: 1 0 auto;
+}
+
 /* Footer styles */
 .footer {
-    margin-top: auto;
+    flex-shrink: 0;
     background-color: #fff;
+    z-index: 1000;
 }
 
 /* Button styles */

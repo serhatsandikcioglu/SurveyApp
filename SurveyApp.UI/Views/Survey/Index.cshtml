@@ -1,4 +1,6 @@
-﻿<div>
+﻿@model List<QuestionDTO>
+
+<div>
 <form method="post" action="CreateSurvey">
         @if (!User.Identity.IsAuthenticated)
         {
