@@ -1,0 +1,130 @@
+﻿/* Question Pool Container */
+.question-pool-container {
+    padding: 1.5rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 2rem;
+}
+
+/* Table Styles */
+.table {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+    .table th {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        color: #6c757d;
+        padding: 1rem;
+    }
+
+    .table td {
+        padding: 1rem;
+        vertical-align: middle;
+        word-break: break-word;
+    }
+
+/* Table Responsive Container */
+.table-responsive {
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dee2e6 #fff;
+}
+
+    /* Webkit scrollbar styles */
+    .table-responsive::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .table-responsive::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb {
+        background-color: #dee2e6;
+        border-radius: 4px;
+    }
+
+/* Choice List */
+.choice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+}
+
+    .choice-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        color: #495057;
+        padding-right: 1rem;
+    }
+
+        .choice-list li:last-child {
+            margin-bottom: 0;
+        }
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    color: #6c757d;
+}
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #dee2e6;
+    }
+
+    .empty-state p {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .empty-state small {
+        color: #adb5bd;
+    }
+
+/* Button Styles */
+.btn-primary {
+    background: var(--primary-gradient);
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #009688, #8bc34a);
+        transform: translateY(-2px);
+    }
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .question-pool-container {
+        padding: 1rem;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+    }
+
+    .table-responsive {
+        max-height: calc(100vh - 250px);
+    }
+}
