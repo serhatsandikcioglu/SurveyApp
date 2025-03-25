@@ -12,6 +12,7 @@ namespace SurveyApp.Service.Interfaces
     {
         List<QuestionDTO> GetAllConfirmedQuestion();
         List<QuestionDTO> GetAllNotConfirmedQuestion();
+        List<QuestionDTO> GetFirst10Question();
         void Delete(Guid id);
         void Update(QuestionDTO question);
         void Add(QuestionDTO question);

@@ -26,20 +26,23 @@ namespace SurveyApp.UI.Controllers
 
         public async  Task<IActionResult> Index(QuestionModel questions)
         {
-            AspNetUser user = await _userManager.GetUserAsync(User);
-            if (user == null && questions.selectedQuestions.Count > 4)
+            bool isAuthenticated = User.Identity.IsAuthenticated;
+
+            if (!isAuthenticated && questions.selectedQuestions.Count > 4)
             {
                 TempData["danger"] = "Non-members can add up to 4 questions to the survey.";
                 return RedirectToAction("SurveyQuestions");
             }
-            if (user != null && questions.selectedQuestions.Count > 10)
+
+            if (isAuthenticated && questions.selectedQuestions.Count > 10)
             {
                 TempData["danger"] = "You can add up to 10 questions to the survey.";
                 return RedirectToAction("SurveyQuestions");
             }
+
             List<QuestionDTO> surveyQuestions = _questionService.GetQuestionList(questions);
             TempData["success"] = "Select the answers.";
-            //questions.selectedQuestions = null;
+
             return View(surveyQuestions);
         }
         [HttpPost]
@@ -119,9 +122,12 @@ namespace SurveyApp.UI.Controllers
             return View(surveyList);
 ;
         }
-        public IActionResult SurveyQuestions()
+        public async Task<IActionResult> SurveyQuestions()
         {
-            List<QuestionDTO> questions = _questionService.GetAllConfirmedQuestion().ToList();
+            List<QuestionDTO> questions = User.Identity.IsAuthenticated
+       ? _questionService.GetAllConfirmedQuestion().ToList()
+       : _questionService.GetFirst10Question().ToList();
+
             return View(questions);
         }
         public IActionResult QuotaFilled()

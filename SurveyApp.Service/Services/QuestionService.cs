@@ -58,7 +58,11 @@ namespace SurveyApp.Service.Services
             List<Question> questions = _unitOfWork.QuestionRepository.GetAll(false);
             return _mapper.Map<List<QuestionDTO>>(questions);
         }
-
+        public List<QuestionDTO> GetFirst10Question()
+        {
+            List<Question> questions = _unitOfWork.QuestionRepository.GetFirst10Question();
+            return _mapper.Map<List<QuestionDTO>>(questions);
+        }
         public QuestionDTO GetById(Guid id)
         {
             Question question = _unitOfWork.QuestionRepository.GetById(id);
@@ -73,13 +77,8 @@ namespace SurveyApp.Service.Services
         }
         public List<QuestionDTO> GetQuestionList(QuestionModel model)
         {
-            List<QuestionDTO> questionList = new List<QuestionDTO>();
-            foreach (var guid in model.selectedQuestions)
-            {
-               Question question = _unitOfWork.QuestionRepository.GetById(guid);
-                questionList.Add(_mapper.Map<QuestionDTO>(question)); 
-            }
-            return questionList;
+               List<Question> questions = _unitOfWork.QuestionRepository.GetByIds(model.selectedQuestions);
+            return _mapper.Map<List<QuestionDTO>>(questions);
         }
     }
 }

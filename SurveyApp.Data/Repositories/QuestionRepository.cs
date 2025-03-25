@@ -32,5 +32,11 @@ namespace SurveyApp.Data.Repositories
         {
             return _dbSet.Where(q => ids.Contains(q.Id)).ToList();
         }
+
+        public List<Question> GetFirst10Question()
+        {
+                return _dbSet.Where(x => x.IsConfirmed == true).Take(10).ToList();
+
+        }
     }
 }

@@ -34,10 +34,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{
-                                var questions = User.Identity.IsAuthenticated ? Model : Model.Take(10);
-                            }
-                            @foreach (var question in questions)
+                            @foreach (var question in Model)
                             {
                                 <tr>
                                     <td class="align-middle">@question.Text</td>

@@ -11,5 +11,6 @@ namespace SurveyApp.Data.Interfaces
     {
         List<Question> GetAll(bool isConfirmed);
         List<Question> GetByIds(List<Guid> ids);
+        List<Question> GetFirst10Question();
     }
 }
