@@ -13,6 +13,6 @@ namespace SurveyApp.Service.Interfaces
         Guid Add(SurveyDTO survey);
         SurveyDTO GetById(Guid id);
         void Delete(Guid id);
-        List<SurveyDTO> GetAllByUserId(Guid id);
+        Task<List<SurveyDTO>> GetAllByUserId(Guid id);
     }
 }

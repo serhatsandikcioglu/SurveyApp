@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Distributed;
 using SurveyApp.Data.DTO_s;
 using SurveyApp.Data.Entities;
 using SurveyApp.Data.Interfaces;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SurveyApp.Service.Services
 {
@@ -16,11 +18,13 @@ namespace SurveyApp.Service.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IDistributedCache _cache;
 
-        public SurveyService(IUnitOfWork unitOfWork, IMapper mapper)
+        public SurveyService(IUnitOfWork unitOfWork, IMapper mapper, IDistributedCache cache)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public Guid Add(SurveyDTO survey)
@@ -43,10 +47,27 @@ namespace SurveyApp.Service.Services
             throw new NotImplementedException();
         }
 
-        public List<SurveyDTO> GetAllByUserId(Guid id)
+        public async Task<List<SurveyDTO>> GetAllByUserId(Guid id)
         {
+            string cacheKey = $"Surveys_{id}";
+
+            var cachedData = await _cache.GetStringAsync(cacheKey);
+            if (!string.IsNullOrEmpty(cachedData))
+            {
+                return JsonConvert.DeserializeObject<List<SurveyDTO>>(cachedData);
+            }
+
             List<Survey> surveys = _unitOfWork.SurveyRepository.GetAllByUserId(id);
             var mappedSurveys = _mapper.Map<List<SurveyDTO>>(surveys);
+
+            
+            var cacheOptions = new DistributedCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
+            };
+
+            await _cache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(mappedSurveys), cacheOptions);
+
             return mappedSurveys;
         }
 

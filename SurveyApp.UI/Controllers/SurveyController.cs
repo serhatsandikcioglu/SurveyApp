@@ -118,15 +118,15 @@ namespace SurveyApp.UI.Controllers
         public async Task<IActionResult> UserScore()
         {
             AspNetUser user = await _userManager.GetUserAsync(User);
-            List<SurveyDTO> surveyList = _surveyService.GetAllByUserId(user.Id);
+            List<SurveyDTO> surveyList = await _surveyService.GetAllByUserId(user.Id);
             return View(surveyList);
 ;
         }
         public async Task<IActionResult> SurveyQuestions()
         {
             List<QuestionDTO> questions = User.Identity.IsAuthenticated
-       ? _questionService.GetAllConfirmedQuestion().ToList()
-       : _questionService.GetFirst10Question().ToList();
+             ? _questionService.GetAllConfirmedQuestion().ToList()
+             : _questionService.GetFirst10Question().ToList();
 
             return View(questions);
         }

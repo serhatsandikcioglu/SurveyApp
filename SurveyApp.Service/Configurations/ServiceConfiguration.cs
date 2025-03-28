@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 using SurveyApp.Data.DataBase;
 using SurveyApp.Data.DTO_s;
 using SurveyApp.Data.Entities;
@@ -45,6 +46,13 @@ namespace SurveyApp.Service.Configurations
                     action.MigrationsAssembly("SurveyApp.Data");
                 });
 
+            });
+    
+
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = configuration["Redis:ConnectionString"];
+                options.InstanceName = "SurveyApp_";
             });
 
 
